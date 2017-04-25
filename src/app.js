@@ -2,7 +2,7 @@ import 'core-js';
 import 'zone.js/dist/zone.js';
 import 'zone.js/dist/long-stack-trace-zone'
 
-import { module, component, browser, rModule, browserModule } from 'ng2es6helper';
+import { module, component, browserPlatform, browserModule} from 'ng2es6helper';
 
 const componentProp = { 
     selector: 'app', 
@@ -50,5 +50,5 @@ const mainModule = module(moduleProp,
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  browser().bootstrapModule(mainModule);
+  browserPlatform().bootstrapModule(mainModule);
 });
