@@ -5,6 +5,7 @@ const path = require("path");
 const bootstrapEntryPoints = require('./webpack.bootstrap.config');
 const glob = require('glob');
 const PurifyCSSPlugin = require('purifycss-webpack');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const isProd = process.env.NODE_ENV === 'production'; //true or false
 const cssDev = [
@@ -39,7 +40,8 @@ const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoint
 
 module.exports = {
     entry: {
-        app: './src/app.js'
+        app: './src/app.js',
+        vendor: ['core-js', 'zone.js/dist/zone.js', 'zone.js/dist/long-stack-trace-zone']
     },
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -95,6 +97,31 @@ module.exports = {
         new PurifyCSSPlugin({
             // Give paths to parse for rules. These should be absolute!
             paths: glob.sync(path.join(__dirname, 'src/*.html'))
+        }),
+        new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.(js|html)$/,
+            threshold: 10240,
+            minRatio: 0.8
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor",
+            filename: "commons.js",
+            // filename: "vendor.js"
+            // (Give the chunk a different name)
+
+            minChunks: Infinity,
+            // (with more entries, this ensures that no other module
+            //  goes into the vendor chunk)
         })
+        /*when do build use it to remove the comments in bundle
+        new webpack.optimize.UglifyJsPlugin({
+            compress: { 
+                warnings: false 
+            },
+            comments: false,
+            sourceMap: false
+        })*/
     ]
 }

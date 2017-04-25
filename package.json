@@ -19,6 +19,7 @@
     "babel-preset-es2015-native-modules": "^6.9.4",
     "bootstrap-loader": "^2.0.0",
     "bootstrap-sass": "^3.3.7",
+    "compression-webpack-plugin": "^0.4.0",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.0",
     "file-loader": "^0.10.1",
@@ -38,20 +39,20 @@
     "webpack-dev-server": "^2.2.0"
   },
   "dependencies": {
+    "@angular/common": "^4.0.3",
+    "@angular/compiler": "^4.0.3",
     "@angular/core": "^4.0.3",
+    "@angular/http": "^4.0.3",
+    "@angular/material": "^2.0.0-beta.3",
+    "@angular/platform-browser": "^4.0.3",
     "@angular/platform-browser-dynamic": "^4.0.3",
     "@angular/router": "^4.0.3",
+    "core-js": "^2.4.1",
+    "ie-shim": "^0.1.0",
     "ng2es6helper": "git+https://github.com/pankajbadukale/ng2es6helperJS.git",
-    "core-js": "2.4.1",
-    "ie-shim": "0.1.0",
-    "reflect-metadata": "0.1.9",
-    "rxjs": "5.0.2",
-    "zone.js": "0.7.6",
-    "@angular/common": "4.0.3",
-    "@angular/platform-browser": "4.0.3",
-    "rxjs": "5.3.0",
-    "symbol-observable": "1.0.4",
-    "zone.js": "0.8.8",
-    "@angular/compiler": "4.0.3"
+    "reflect-metadata": "^0.1.9",
+    "rxjs": "^5.3.0",
+    "symbol-observable": "^1.0.4",
+    "zone.js": "^0.8.8"
   }
 }

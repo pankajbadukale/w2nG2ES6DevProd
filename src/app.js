@@ -1,8 +1,4 @@
-import 'core-js';
-import 'zone.js/dist/zone.js';
-import 'zone.js/dist/long-stack-trace-zone'
-
-import { module, component, browserPlatform, browserModule} from 'ng2es6helper';
+import { module, component, browserPlatform, browserModule, appProdMode} from 'ng2es6helper';
 
 const componentProp = { 
     selector: 'app', 
