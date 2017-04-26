@@ -1,40 +1,50 @@
+import './app.scss';
+
 import { module, component, browserPlatform, browserModule, appProdMode, browserAnimationModule, mdButton} from 'ng2es6helper';
 
+import { MaterialModule, MdDialogModule, MdDialog } from '@angular/material';
+console.log(MdDialog);
 const componentProp = { 
     selector: 'app', 
     template: `
-<div class="example-container">
-  <h3>Normal Buttons</h3>
-  <div class="button-row">
-    <button md-button>Flat button</button>
-    <button md-raised-button>Raised button</button>
-    <button md-fab><md-icon>check</md-icon></button>
-    <button md-mini-fab><md-icon>check</md-icon></button>
-  </div>
-
-  <h3>Link Buttons</h3>
-  <div class="example-button-row">
-    <a md-button routerLink=".">Flat button</a>
-    <a md-raised-button routerLink=".">Raised button</a>
-    <a md-fab routerLink="."><md-icon>check</md-icon></a>
-    <a md-mini-fab routerLink="."><md-icon>check</md-icon></a>
-  </div>
-</div>
-    `
+        <button md-button (click)="openDialog()">Open dialog</button>
+    `,
+    service: [[MdDialog]]
 };
 
 const appComponent = component(
     componentProp,
     class appComponent {
-        constructor() {
+        constructor(mdDialog) {
+            this.dialog = mdDialog;
+        }
 
+        openDialog() {
+            this.dialog.open(DialogComponent);
+        }
+    }
+);
+
+const DialogComponent = component(
+    {
+        selector: 'mydialog',
+        template: `
+hi
+        `
+    },
+    class dialogComponent {
+        constructor() {
+            
         }
     }
 );
 
 const appModuleProp = {
     imports: [mdButton],
-    declarations: [ appComponent ]
+    declarations: [ appComponent, DialogComponent ],
+    exports: [appComponent, DialogComponent],
+    providers: [MdDialog],
+    entryComponents: [appComponent]
 };
 
 const appmainModule = module(appModuleProp, 
@@ -49,8 +59,11 @@ const moduleProp = {
     imports: [ 
         browserModule,
         appmainModule,
-        browserAnimationModule
+        browserAnimationModule,
+        MdDialogModule,
+        MaterialModule
     ],
+    entryComponents: [DialogComponent],
     bootstrap: [ appComponent ]
 };
 
