@@ -41,7 +41,17 @@ const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoint
 module.exports = {
     entry: {
         app: './src/app.js',
-        vendor: ['core-js', 'zone.js/dist/zone.js', 'zone.js/dist/long-stack-trace-zone']
+        vendor: [
+            'core-js', 
+            'zone.js/dist/zone.js', 
+            'zone.js/dist/long-stack-trace-zone',
+            '@angular/core',
+            '@angular/router',
+            '@angular/platform-browser-dynamic',
+            '@angular/platform-browser',
+            '@angular/platform-browser/animations',
+            '@angular/material'
+        ]
     },
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -77,7 +87,7 @@ module.exports = {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
         hot: true,
-        open: true,
+        //open: true,
         stats: 'errors-only'
     },
     plugins: [
@@ -114,14 +124,15 @@ module.exports = {
             minChunks: Infinity,
             // (with more entries, this ensures that no other module
             //  goes into the vendor chunk)
-        })
+        }),
         /*when do build use it to remove the comments in bundle
+        /*/
         new webpack.optimize.UglifyJsPlugin({
             compress: { 
                 warnings: false 
             },
             comments: false,
             sourceMap: false
-        })*/
+        })
     ]
 }

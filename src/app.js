@@ -1,15 +1,13 @@
 import './app.scss';
 
-import { module, component, browserPlatform, browserModule, appProdMode, browserAnimationModule, mdButton} from 'ng2es6helper';
-
-import { MaterialModule, MdDialogModule, MdDialog } from '@angular/material';
-console.log(MdDialog);
+import {mdModule, mdDialogModule, mdDialog, ngmodule, component, browserPlatform, browserModule, appProdMode, browserAnimationModule, mdButton} from 'ng2es6helper';
+console.log(mdDialog);
 const componentProp = { 
     selector: 'app', 
     template: `
         <button md-button (click)="openDialog()">Open dialog</button>
     `,
-    service: [[MdDialog]]
+    service: [[mdDialog]]
 };
 
 const appComponent = component(
@@ -20,6 +18,7 @@ const appComponent = component(
         }
 
         openDialog() {
+            debugger
             this.dialog.open(DialogComponent);
         }
     }
@@ -43,11 +42,11 @@ const appModuleProp = {
     imports: [mdButton],
     declarations: [ appComponent, DialogComponent ],
     exports: [appComponent, DialogComponent],
-    providers: [MdDialog],
+    providers: [mdDialog],
     entryComponents: [appComponent]
 };
 
-const appmainModule = module(appModuleProp, 
+const appmainModule = ngmodule(appModuleProp, 
     class appmainModule {
         constructor() {
 
@@ -60,14 +59,14 @@ const moduleProp = {
         browserModule,
         appmainModule,
         browserAnimationModule,
-        MdDialogModule,
-        MaterialModule
+        mdDialogModule,
+        mdModule
     ],
     entryComponents: [DialogComponent],
     bootstrap: [ appComponent ]
 };
 
-const mainModule = module(moduleProp, 
+const mainModule = ngmodule(moduleProp, 
     class mainModule {
         constructor() {
 
